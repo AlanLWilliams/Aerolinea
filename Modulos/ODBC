@@ -1,0 +1,31 @@
+Imports System.Data.Odbc
+
+Module OdbcConexion
+    Public connection As OdbcConnection
+	Public query As String
+
+    Public Function connect(ByVal name)
+        Try
+            connection = New OdbcConnection("DSN=" + name)
+            connection.Open()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message & vbCrLf & "La conexión ha fallado.")
+            Return False
+        End Try
+    End Function
+	
+    Public Function doQuery(ByVal queryString As String)
+        query = queryString
+        command = New OdbcCommand(query, OdbcConexion.connection)
+        command.CommandType = CommandType.Text
+        Try
+            result = command.ExecuteReader()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message & vbCrLf & "Query rechazada")
+            Return False
+        End Try
+    End Function
+	
+End Module
