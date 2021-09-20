@@ -4,14 +4,14 @@ use aerolinea;
 
 create table Combustible(
 IdCombustible int auto_increment,
-Nombre varchar(15),
+Nombre varchar(20),
 Precio int,
 constraint PK_Combustible primary key(IdCombustible)
 )engine=innoDB;
 
 create table Modelo(
 IdModelo int auto_increment,
-Nombre varchar(40),
+Nombre varchar(60),
 IdCombustible int,
 MaxCombustible int,
 Consumo int,
@@ -23,13 +23,13 @@ constraint FK_Modelo foreign key (IdCombustible) references Combustible(IdCombus
 
 create table Puesto(
 IdPuesto int auto_increment,
-Nombre varchar(40),
+Nombre varchar(80),
 constraint PK_Puesto primary key(IdPuesto)
 )engine = innoDB;
 
 create table Fabricante(
 IdFabricante int auto_increment,
-Nombre varchar(40),
+Nombre varchar(80),
 constraint PK_Fabricante primary key(IdFabricante)
 )engine = innoDB;
 
@@ -58,7 +58,7 @@ create table Aeropuerto(
 IdAero int auto_increment,
 OACI varchar(4),
 Nombre varchar(60),
-Estado varchar(30),
+Abierto boolean,
 constraint PK_Aeropuerto primary key(IdAero)
 )engine = innoDB;
 
@@ -67,7 +67,7 @@ IdAvion int auto_increment,
 Matricula varchar(10),
 IdFabricante int,
 IdModelo int,
-Estado varchar(40),
+Estado varchar(40), /*Disponible, en vuelo, no habilitado*/
 IdAero int,
 constraint PK_Avion primary key (IdAvion),
 constraint FK_Avion foreign key (IdFabricante) references Fabricante(IdFabricante),
@@ -97,12 +97,12 @@ create table Reparacion(
 IdReparacion int auto_increment,
 IdAvion int,
 IdCategoria int,
-Estado varchar(20),
+Estado varchar(30), /*Pendiente, en proceso, finalizado*/
 Severidad varchar(20),
 Detalle varchar(1000),
 Costo float,
-FechaI date,
-FechaR date,
+FechaI date, /*Fecha inicio*/
+FechaR date, /*Fecha reparacion*/
 constraint PK_Reparacion primary key (IdReparacion),
 constraint FK_Reparacion foreign key (IdCategoria) references Categoria(IdCategoria),
 constraint FK_Reparacion2 foreign key (IdAvion) references Avion(IdAvion)
@@ -115,8 +115,8 @@ CHPM float,
 Estado varchar(20),
 Costo float,
 Detalle varchar(1000),
-FechaI date,
-FechaR date,
+FechaI date, /*Fecha inicio*/
+FechaR date, /*Fecha reparacion*/
 constraint PK_Mantenimiento primary key (IdMantenimiento)
 )engine = innoDB;
 
