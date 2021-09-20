@@ -6,7 +6,7 @@ create table Combustible(
 IdCombustible int auto_increment,
 Nombre varchar(20),
 Precio int,
-constraint PK_Combustible primary key(IdCombustible)
+constraint PK_Combustible primary key (IdCombustible)
 )engine=innoDB;
 
 create table Modelo(
@@ -17,20 +17,20 @@ MaxCombustible int,
 Consumo int,
 Filas int,
 Columnas int,
-constraint PK_Combustible primary key(IdModelo),
+constraint PK_Modelo primary key (IdModelo),
 constraint FK_Modelo foreign key (IdCombustible) references Combustible(IdCombustible)
 )engine=innoDB;
 
 create table Puesto(
 IdPuesto int auto_increment,
 Nombre varchar(80),
-constraint PK_Puesto primary key(IdPuesto)
+constraint PK_Puesto primary key (IdPuesto)
 )engine = innoDB;
 
 create table Fabricante(
 IdFabricante int auto_increment,
 Nombre varchar(80),
-constraint PK_Fabricante primary key(IdFabricante)
+constraint PK_Fabricante primary key (IdFabricante)
 )engine = innoDB;
 
 create table Persona(
@@ -49,7 +49,7 @@ create table Tripulante(
 IdTripulante int auto_increment,
 IdPersona int,
 IdPuesto int,
-constraint PK_Tripulante primary key(IdTripulante),
+constraint PK_Tripulante primary key (IdTripulante),
 constraint FK_Tripulante foreign key (IdPersona) references Persona(IdPersona),
 constraint FK_Tripulante2 foreign key (IdPuesto) references Puesto(IdPuesto)
 )engine = innoDB;
@@ -59,7 +59,7 @@ IdAero int auto_increment,
 OACI varchar(4),
 Nombre varchar(60),
 Abierto boolean,
-constraint PK_Aeropuerto primary key(IdAero)
+constraint PK_Aeropuerto primary key (IdAero)
 )engine = innoDB;
 
 create table Avion(
