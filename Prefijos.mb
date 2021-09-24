@@ -1,0 +1,25 @@
+Prefijos a usar creando forms/elementos.
+
+Ejemplos.
+Nombre de un boton de continuar | btnContinuar
+Form de registro | frmRegistro
+Combobox de género | frmGenero
+
+Form          | frm	 
+Check Box     |	chk	 
+Label         |	lbl
+Combo Box     |	cbo	 	
+Image         | img
+Line          | lin
+List Box      | lst
+Data          | dat	 	
+DirectoryList | dir	 	
+Option Button |	opt
+Drive ListBox | drv	 	
+Picture Box   |	pic
+File List Box |	fil	 	
+Text Box      |	txt
+Frame         |	fra	 	
+CommandButton |	cmd	 	
+Horizontal ScrollBar |	hsb	 	
+Vertical Scroll Bar |	vsb
