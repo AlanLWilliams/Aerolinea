@@ -1,0 +1,17 @@
+Form |frm	 
+Check Box	chk	 
+Label |	lbl
+Combo Box |	cbo	 	
+Line |lin
+List Box | lst
+Data |dat	 	
+Directory List Box |dir	 	
+Option Button |	opt
+Drive List Box | drv	 	
+Picture Box |	pic
+File List Box |	fil	 	
+Text Box |	txt
+Frame |	fra	 	
+Command Button |	cmd	 	
+Horizontal Scroll Bar |	hsb	 	
+Vertical Scroll Bar |	vsb
