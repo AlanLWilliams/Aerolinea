@@ -14,4 +14,5 @@ Acá se encuentran todas las estandarizaciones que debemos aplicar a lo largo de
 
 ### Visual Basic
 -A la hora de crear forms o elementos dentro de este, aplicar el [prefijo correspondiente](https://github.com/AlanLWilliams/Aerolinea/blob/master/Prefijos.mb).
+
 -La font a usar es Lucida Console, tamaño 9.
