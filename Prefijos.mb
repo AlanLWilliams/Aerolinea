@@ -2,7 +2,8 @@ Form |frm
 Check Box	chk	 
 Label |	lbl
 Combo Box |	cbo	 	
-Line |lin
+Image | img
+Line | lin
 List Box | lst
 Data |dat	 	
 Directory List Box |dir	 	
