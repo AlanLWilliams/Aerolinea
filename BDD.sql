@@ -40,7 +40,6 @@ Apellido varchar(50),
 DNI int,
 Telefono int,
 Mail varchar(50),
-IdPuesto int,
 constraint PK_Persona primary key (IdPersona),
 constraint FK_Persona foreign key (IdPuesto) references Puesto(IdPuesto)
 )engine=innoDB;
