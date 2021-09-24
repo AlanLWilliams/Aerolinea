@@ -31,5 +31,8 @@ Acá se encuentran todas las estandarizaciones que debemos aplicar a lo largo de
 
 -El texto de los botones deberá estar todo en mayúscula, respetando las reglas de fonts.
 
+### Group Box
+-El atributo "Texto" de las group box deberá estar siempre vacío.
+
 ### Combo Box
 -El atributo "DropDownStyle" deberá ser siempre "DropDownList". Usar Textbox cuando haga falta.
