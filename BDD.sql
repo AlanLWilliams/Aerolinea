@@ -18,7 +18,6 @@ MontoExcesoEquipaje int
 )engine=innodb;
 
 
-
 create table tipoBoleto(
 IdTipoBoleto int auto_increment primary key,
 NombreTipo varchar(40),
