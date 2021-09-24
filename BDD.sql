@@ -41,7 +41,6 @@ DNI int,
 Telefono int,
 Mail varchar(50),
 constraint PK_Persona primary key (IdPersona),
-constraint FK_Persona foreign key (IdPuesto) references Puesto(IdPuesto)
 )engine=innoDB;
 
 create table Tripulante(
