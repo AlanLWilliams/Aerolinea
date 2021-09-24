@@ -1,3 +1,10 @@
+Prefijos a usar creando forms/elementos.
+
+Ejemplos.
+Nombre de un boton de continuar | btnContinuar
+Form de registro | frmRegistro
+Combobox de género | frmGenero
+
 Form |frm	 
 Check Box	chk	 
 Label |	lbl
