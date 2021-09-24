@@ -11,3 +11,7 @@ Acá se encuentran todas las estandarizaciones que debemos aplicar a lo largo de
 -Cada palabra comenzará con letra mayúscula. (Horas**V**uelo en vez de Horas**v**uelo)
 
 -Todas las palabras que no sean parte del nombre de un atributo, serán en minúscula. (create table, constraint, primary/foreign key, engine, etc)
+
+### Visual Basic
+-A la hora de crear forms o elementos dentro de este, aplicar el [prefijo correspondiente](https://github.com/AlanLWilliams/Aerolinea/blob/master/Prefijos.mb).
+-La font a usar es Lucida Console, tamaño 9.
