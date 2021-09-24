@@ -33,6 +33,7 @@ create table Mascota{
 IdMascota int auto_increment primary key,
 NroBoleto int,
 Peso float,
+MontoKilo float,
 constraint fk_boletoMascota foreign key(NroBoleto) references Boleto(NroBoleto)
 }
 
