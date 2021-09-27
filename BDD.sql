@@ -13,6 +13,14 @@ FechaNacimiento date,
 constraint PK_Persona primary key (IdPersona)
 )engine=innoDB;
 
+CREATE TABLE cliente(
+	idCliente INT(11) AUTO_INCREMENT,
+	IdPersona int,
+	CONSTRAINT pk_vuelo PRIMARY KEY (idCliente),
+	constraint fk_personaCliente foreign key (IdPersona) references Persona(IdPersona)
+)engine=innoDB;
+
+
 create table Combustible(
 IdCombustible int auto_increment,
 Nombre varchar(20),
@@ -154,6 +162,7 @@ LetraAsiento varchar(2)/*A B C D E F G H I J*/
 
 create table Boleto(
 NroBoleto int  auto_increment primary key,
+IdCliente int,
 HoraSalida date,
 FechaViaje date,
 HoraViaje time,
@@ -164,6 +173,7 @@ IdAsientoFila int,
 NroColumna int,
 IdVuelo int,
 constraint  fk_tipoBoleto foreign key(idTipoBoleto) references tipoBoleto(idTipoBoleto),
+constraint  fk_clienteBoleto foreign key(IdCliente) references Cliente(IdCliente),
 constraint  fk_asientoFila foreign key(IdAsientoFila) references filaAsiento(IdAsientoFila),
 constraint  fk_VueloBoleto foreign key(IdVuelo) references Vuelo(IdVuelo) 
 )engine=innodb;
@@ -274,12 +284,6 @@ TABLAS DE AYUDA
 
 
 
-CREATE TABLE cliente(
-	idCliente INT(11) AUTO_INCREMENT,
-	nombre VARCHAR(15),
-	apellido VARCHAR(15),
-	CONSTRAINT pk_vuelo PRIMARY KEY (idCliente)
-)engine=innoDB;
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
