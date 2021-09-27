@@ -5,7 +5,7 @@ use aerolinea;
 create table Persona(
 IdPersona int auto_increment,
 Nombre varchar(50),
-Apellido varchar(50),
+ApellIdo varchar(50),
 DNI int,
 Telefono int,
 Mail varchar(50),
@@ -102,7 +102,7 @@ create table Informes(
 
 IdInforme int auto_increment,
 Femicion smalldatetime,
-idTipo int,
+IdTipo int,
 Detalle varchar(100),
 
 constraint PK_Informes primary key(IdInforme), 
@@ -154,7 +154,7 @@ LetraAsiento varchar(2)/*A B C D E F G H I J*/
 
 create table Boleto(
 NroBoleto int  auto_increment primary key,
-HoraSalida date,
+HoraSalIda date,
 FechaViaje date,
 HoraViaje time,
 Monto float,
@@ -163,7 +163,7 @@ viajaMascota boolean,
 IdAsientoFila int,
 NroColumna int,
 IdVuelo int,
-constraint  fk_tipoBoleto foreign key(idTipoBoleto) references tipoBoleto(idTipoBoleto),
+constraint  fk_tipoBoleto foreign key(IdTipoBoleto) references tipoBoleto(IdTipoBoleto),
 constraint  fk_asientoFila foreign key(IdAsientoFila) references filaAsiento(IdAsientoFila),
 constraint  fk_VueloBoleto foreign key(IdVuelo) references Vuelo(IdVuelo) 
 )engine=innodb;
@@ -206,7 +206,7 @@ IdReparacion int auto_increment,
 IdAvion int,
 IdCategoria int,
 Estado varchar(30), /*Pendiente, en proceso, finalizado*/
-Severidad varchar(20),
+SeverIdad varchar(20),
 Detalle varchar(1000),
 Costo float,
 FechaI date, /*Fecha inicio*/
@@ -215,6 +215,16 @@ constraint PK_Reparacion primary key (IdReparacion),
 constraint FK_Reparacion foreign key (IdCategoria) references Categoria(IdCategoria),
 constraint FK_Reparacion2 foreign key (IdAvion) references Avion(IdAvion)
 )engine = innoDB;
+
+create table SolicitudReparacion(
+IdSolicitud int auto_increment,
+IdReparacion int,
+Estado varchar(30), /*Pendiente, aceptado, rechazado*/
+Presupuesto float,
+constraint PK_SolicitudReparacion primary key (IdSolicitud),
+constraint FK_SolicitudReparacion foreign key (IdReparacion) references Reparacion(IdReparacion)
+)engine = innoDB;
+	
 
 create table Mantenimiento(
 IdMantenimiento int auto_increment,
@@ -230,7 +240,7 @@ constraint PK_Mantenimiento primary key (IdMantenimiento)
 
 
 Create table Sector(
-codS int,
+IdS int,
 Nombre varchar(50),
 descripcion varchar(100),
 constraint pk_Sector primary key (CodS)
@@ -240,10 +250,10 @@ Supuesto: Un empleado solo trabajara en un sector
 */
 
 Create table empleado(
-codE int,
-codP int,
-idioma int,
-codS int,
+IdEmpleado int,
+IdP int,
+Idioma int,
+IdS int,
 constraint pk_empleado primary key (CodE)
 )engine=innodb;
 
@@ -275,30 +285,30 @@ TABLAS DE AYUDA
 
 
 CREATE TABLE cliente(
-	idCliente INT(11) AUTO_INCREMENT,
-	nombre VARCHAR(15),
-	apellido VARCHAR(15),
-	CONSTRAINT pk_vuelo PRIMARY KEY (idCliente)
+	IdCliente INT(11) AUTO_INCREMENT,
+	Nombre VARCHAR(15),
+	ApellIdo VARCHAR(15),
+	CONSTRAINT pk_vuelo PRIMARY KEY (IdCliente)
 )engine=innoDB;
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
 
 CREATE TABLE estadoCheckin(
-	idEstado INT(3) AUTO_INCREMENT,
-	descripcion VARCHAR(100),
-	CONSTRAINT pk_estado PRIMARY KEY(idEstado)
+	IdEstado INT(3) AUTO_INCREMENT,
+	Descripcion VARCHAR(100),
+	CONSTRAINT pk_estado PRIMARY KEY(IdEstado)
 )engine=innoDB;
 ALTER TABLE estadoCheckin AUTO_INCREMENT = 1;
 INSERT INTO estadoCheckin (descripcion) VALUES('No revisado'), ('Aprobado') ,('Vuelo diferente'), ('PCR positivo'), ('Equipaje extra no abonado'), ('Vuelo reasignado');
 
 create table vueloCliente(
-	idVueloCliente INT(11) AUTO_INCREMENT,
-	idBoleto INT(11),
-	pcr BOOLEAN,
-	estado INT(11), /* Tipo de estado dependiendo de la situacion del cliente, ej: 10-falta abonar el equipaje extra */
-	CONSTRAINT pk_vuelocliente PRIMARY KEY (idVueloCliente),
-	CONSTRAINT fk_estadocheckin FOREIGN KEY (estado) REFERENCES estadoCheckin (idEstado)
+	IdVueloCliente INT(11) AUTO_INCREMENT,
+	IdBoleto INT(11),
+	Pcr BOOLEAN,
+	Estado INT(11), /* Tipo de estado dependiendo de la situacion del cliente, ej: 10-falta abonar el equipaje extra */
+	CONSTRAINT pk_vuelocliente PRIMARY KEY (IdVueloCliente),
+	CONSTRAINT fk_estadocheckin FOREIGN KEY (estado) REFERENCES estadoCheckin (IdEstado)
 )engine=innoDB;
 /* Setea el auto incrementable */
 ALTER TABLE vueloCliente AUTO_INCREMENT = 1001;
@@ -306,24 +316,24 @@ ALTER TABLE vueloCliente AUTO_INCREMENT = 1001;
 
 
 create table equipaje(
-	idEquipaje INT(11) AUTO_INCREMENT,
-	idVueloCliente INT(11),
-	peso INT(3),
-	ubicacion VARCHAR(45),
-	reasignado BOOLEAN,
-	CONSTRAINT pk_equipaje PRIMARY KEY(idEquipaje),
-	CONSTRAINT fk_vuelocliente foreign KEY (idVueloCliente) REFERENCES vueloCliente(idVueloCliente)
+	IdEquipaje INT(11) AUTO_INCREMENT,
+	IdVueloCliente INT(11),
+	Peso INT(3),
+	Ubicacion VARCHAR(45),
+	Reasignado BOOLEAN,
+	CONSTRAINT pk_equipaje PRIMARY KEY(IdEquipaje),
+	CONSTRAINT fk_vuelocliente foreign KEY (IdVueloCliente) REFERENCES vueloCliente(IdVueloCliente)
 )engine=innoDB;
 
 ALTER TABLE equipaje AUTO_INCREMENT = 2001;
 
 create table reasignado(
-	idReasignado INT(11) AUTO_INCREMENT,
-	idEquipaje INT(11),
-	idNvuelo INT(1),
-	CONSTRAINT pk_reasignado primary KEY(idReasignado),
-	CONSTRAINT fk_equipaje_reasignado FOREIGN KEY(idEquipaje) REFERENCES equipaje(idEquipaje),
-	CONSTRAINT fk_idNvuelo FOREIGN KEY (idNvuelo) REFERENCES vuelo(idVuelo)
+	IdReasignado INT(11) AUTO_INCREMENT,
+	IdEquipaje INT(11),
+	IdNvuelo INT(1),
+	CONSTRAINT pk_reasignado primary KEY(IdReasignado),
+	CONSTRAINT fk_equipaje_reasignado FOREIGN KEY(IdEquipaje) REFERENCES equipaje(IdEquipaje),
+	CONSTRAINT fk_IdNvuelo FOREIGN KEY (IdNvuelo) REFERENCES vuelo(IdVuelo)
 )engine=innoDB;
 
 ALTER TABLE reasignado AUTO_INCREMENT = 3001;
