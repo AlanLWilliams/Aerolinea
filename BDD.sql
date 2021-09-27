@@ -65,6 +65,8 @@ create table equipaje(
 	peso INT(3),
 	ubicacion VARCHAR(45),
 	reasignado BOOLEAN,
+	IdDeposito int(11),    /*Si este atributo no es null, obligadamente idCinta es null*/
+	IdCinta int (11),/*Si este atributo no es null, obligadamente idDeposito es null*/
 	CONSTRAINT pk_equipaje PRIMARY KEY(idEquipaje),
 	CONSTRAINT fk_vuelocliente foreign KEY (idVueloCliente) REFERENCES vueloCliente(idVueloCliente)
 )engine=innoDB;
@@ -79,5 +81,20 @@ create table reasignado(
 	CONSTRAINT fk_equipaje_reasignado FOREIGN KEY(idEquipaje) REFERENCES equipaje(idEquipaje),
 	CONSTRAINT fk_idNvuelo FOREIGN KEY (idNvuelo) REFERENCES vuelo(idVuelo)
 )engine=innoDB;
+
+create table Cinta {
+
+IdCinta int(11) ,
+Sector varchar(11) ,
+constraint pk_cinta PRIMARY KEY (idCinta)
+}
+
+create table deposito {
+
+IdDeposito int(11) ,
+IdUbicacion varchar(11) ,
+constraint pk_cinta PRIMARY KEY (IdDeposito),
+constraint fk_equipaje FOREIGN KEY (IdEquipaje)
+}
 
 ALTER TABLE reasignado AUTO_INCREMENT = 3001;
