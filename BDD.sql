@@ -2,9 +2,6 @@ drop database if exists aerolinea;
 create database aerolinea;
 use aerolinea;
 
-
-
-
 create table EquipajeBodega(
 IdEquipajeBodega int auto_increment primary key,
 PiezaKilo int,
