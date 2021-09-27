@@ -2,8 +2,6 @@ drop database if exists aerolinea;
 create database aerolinea;
 use aerolinea;
 
-<<<<<<< HEAD
-=======
 create table Persona(
 IdPersona int auto_increment,
 Nombre varchar(50),
@@ -128,7 +126,6 @@ constraint PK_TipoInforme primary key (IdTipoInf)
 
 
 
->>>>>>> 09283944fa6a72a60eed951e51eec81a86be648f
 create table EquipajeBodega(
 IdEquipajeBodega int auto_increment primary key,
 PiezaKilo int,
