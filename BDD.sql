@@ -13,71 +13,6 @@ FechaNacimiento date,
 constraint PK_Persona primary key (IdPersona)
 )engine=innoDB;
 
-
-
-create table EquipajeBodega(
-IdEquipajeBodega int auto_increment primary key,
-PiezaKilo int,
-MontoExcesoEquipaje int
-)engine=innodb;
-
-create table EquipajeMano(
-IdEquipajeMano int auto_increment primary key,
-PiezaKilo int,
-MontoExcesoEquipaje int
-)engine=innodb;
-
-
-create table tipoBoleto(
-IdTipoBoleto int auto_increment primary key,
-NombreTipo varchar(40),
-SeleccionAsientos boolean default false,
-IdEquipajeBodega int,
-CantEquipajeBodega int,
-IdEquipajeMano int,
-CantEquipajeMano int,
-CambioPasajes float,
-DevolucionPasaje boolean,
-MillaAerolineaPlus boolean,/*Se pueden acumular las millas */
-constraint fk_EquipajeBodega foreign key(IdEquipajeBodega) references EquipajeBodega(IdEquipajeBodega),
-constraint fk_EquipajeMano foreign key(IdEquipajeMano) references EquipajeMano(IdEquipajeMano)
-)engine=innodb;
-
-
-create table filaAsiento(
-IdAsientoFila int primary key,
-LetraAsiento varchar(2)/*A B C D E F G H I J*/
-)engine=innodb;
-
-create table Boleto(
-NroBoleto int  auto_increment primary key,
-HoraSalida date,
-FechaViaje date,
-HoraViaje time,
-Monto float,
-IdTipoBoleto int,
-viajaMascota boolean,
-IdAsientoFila int,
-NroColumna int,
-/*IdVuelo int,*/
-constraint  fk_tipoBoleto foreign key(idTipoBoleto) references tipoBoleto(idTipoBoleto),
-constraint  fk_asientoFila foreign key(IdAsientoFila) references filaAsiento(IdAsientoFila)
-/*,constraint  fk_Vuelo foreign key(IdVuelo) references vuelo(IdVuelo)      cuando se haga el marge, se descomenta con el atributo especifico*/
-)engine=innodb;
-
-
-create table Mascota(
-IdMascota int auto_increment primary key,
-NroBoleto int,
-Peso float,
-MontoKilo float,
-constraint fk_boletoMascota foreign key(NroBoleto) references Boleto(NroBoleto)
-)engine=innodb;
-
-
-
-
-
 create table Combustible(
 IdCombustible int auto_increment,
 Nombre varchar(20),
@@ -135,10 +70,118 @@ IdModelo int,
 Estado varchar(40), /*Disponible, en vuelo, no habilitado*/
 IdAero int,
 constraint PK_Avion primary key (IdAvion),
-constraint FK_Avion foreign key (IdFabricante) references Fabricante(IdFabricante),
-constraint FK_Avion2 foreign key (IdModelo) references Modelo(IdModelo),
-constraint FK_Avion3 foreign key (IdAero) references Aeropuerto(IdAero)
+constraint FK_AvionFabricante foreign key (IdFabricante) references Fabricante(IdFabricante),
+constraint FK_AvionModelo foreign key (IdModelo) references Modelo(IdModelo),
+constraint FK_AvionAero foreign key (IdAero) references Aeropuerto(IdAero)
 )engine = innoDB;
+
+
+create table Vuelo(
+IdVuelo int auto_increment,
+IdAvion int,
+Escala boolean,
+SFechaEst datetime,
+SFechaReal datetime,
+DestinoFinal char,
+constraint PK_Vuelos primary key(IdVuelo),
+constraint FK_AvionVuelo foreign key(IdAvion) references Avion(IdAvion)
+)engine=innoDB;
+
+create table Vuelo-Escala (
+IdVuelo int,
+IdEscala int,
+Millas int,
+constraint PK_VueloEsc primary key (IdVuelo,IdEscala),
+constraint FK_Vue foreign key (IdVuelo) references Vuelo(IdVuelo),
+constraint FK_Esc foreign key (IdEscala) references Escala(IdEscala);
+)engine=innoDB;
+
+
+
+create table Informes(
+
+IdInforme int auto_increment,
+Femicion smalldatetime,
+idTipo int,
+Detalle varchar(100),
+
+constraint PK_Informes primary key(IdInforme), 
+constraint FK_tipo foreign key(IdTipo)references TipoInforme(IdTipoInf)
+
+) engine=innoDB;
+
+create table TipoInforme(
+IdTipoInf int auto_increment,
+Denominacion varchar(20),
+constraint PK_TipoInforme primary key (IdTipoInf)
+) engine = innoDB;
+
+
+
+create table EquipajeBodega(
+IdEquipajeBodega int auto_increment primary key,
+PiezaKilo int,
+MontoExcesoEquipaje int
+)engine=innodb;
+
+create table EquipajeMano(
+IdEquipajeMano int auto_increment primary key,
+PiezaKilo int,
+MontoExcesoEquipaje int
+)engine=innodb;
+
+
+create table tipoBoleto(
+IdTipoBoleto int auto_increment primary key,
+NombreTipo varchar(40),
+SeleccionAsientos boolean default false,
+IdEquipajeBodega int,
+CantEquipajeBodega int,
+IdEquipajeMano int,
+CantEquipajeMano int,
+CambioPasajes float,
+DevolucionPasaje boolean,
+MillaAerolineaPlus boolean,/*Se pueden acumular las millas */
+constraint fk_EquipajeBodega foreign key(IdEquipajeBodega) references EquipajeBodega(IdEquipajeBodega),
+constraint fk_EquipajeMano foreign key(IdEquipajeMano) references EquipajeMano(IdEquipajeMano)
+)engine=innodb;
+
+
+create table filaAsiento(
+IdAsientoFila int primary key,
+LetraAsiento varchar(2)/*A B C D E F G H I J*/
+)engine=innodb;
+
+create table Boleto(
+NroBoleto int  auto_increment primary key,
+HoraSalida date,
+FechaViaje date,
+HoraViaje time,
+Monto float,
+IdTipoBoleto int,
+viajaMascota boolean,
+IdAsientoFila int,
+NroColumna int,
+IdVuelo int,
+constraint  fk_tipoBoleto foreign key(idTipoBoleto) references tipoBoleto(idTipoBoleto),
+constraint  fk_asientoFila foreign key(IdAsientoFila) references filaAsiento(IdAsientoFila),
+constraint  fk_VueloBoleto foreign key(IdVuelo) references Vuelo(IdVuelo) 
+)engine=innodb;
+
+
+create table Mascota(
+IdMascota int auto_increment primary key,
+NroBoleto int,
+Peso float,
+MontoKilo float,
+constraint fk_boletoMascota foreign key(NroBoleto) references Boleto(NroBoleto)
+)engine=innodb;
+
+
+
+
+
+
 
 create table HorasAvion(
 IdHoras int auto_increment,
@@ -246,7 +289,7 @@ CREATE TABLE estadoCheckin(
 	descripcion VARCHAR(100),
 	CONSTRAINT pk_estado PRIMARY KEY(idEstado)
 )engine=innoDB;
-ALTER TABLE  AUTO_INCREMENT = 1;
+ALTER TABLE estadoCheckin AUTO_INCREMENT = 1;
 INSERT INTO estadoCheckin (descripcion) VALUES('No revisado'), ('Aprobado') ,('Vuelo diferente'), ('PCR positivo'), ('Equipaje extra no abonado'), ('Vuelo reasignado');
 
 create table vueloCliente(
@@ -284,3 +327,4 @@ create table reasignado(
 )engine=innoDB;
 
 ALTER TABLE reasignado AUTO_INCREMENT = 3001;
+
