@@ -106,7 +106,7 @@ Apellido varchar(50),
 DNI int,
 Telefono int,
 Mail varchar(50),
-constraint PK_Persona primary key (IdPersona),
+constraint PK_Persona primary key (IdPersona)
 )engine=innoDB;
 
 create table Tripulante(
