@@ -9,6 +9,7 @@ Apellido varchar(50),
 DNI int,
 Telefono int,
 Mail varchar(50),
+FechaNacimiento date,
 constraint PK_Persona primary key (IdPersona),
 )engine=innoDB;
 
