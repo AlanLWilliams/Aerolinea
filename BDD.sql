@@ -161,7 +161,7 @@ LetraAsiento varchar(2)/*A B C D E F G H I J*/
 )engine=innodb;
 
 create table Boleto(
-NroBoleto int  auto_increment primary key,
+IdBoleto int  auto_increment primary key,
 IdCliente int,
 HoraSalida date,
 FechaViaje date,
@@ -181,10 +181,10 @@ constraint  fk_VueloBoleto foreign key(IdVuelo) references Vuelo(IdVuelo)
 
 create table Mascota(
 IdMascota int auto_increment primary key,
-NroBoleto int,
+IdBoleto int,
 Peso float,
 MontoKilo float,
-constraint fk_boletoMascota foreign key(NroBoleto) references Boleto(NroBoleto)
+constraint fk_boletoMascota foreign key(IdBoleto) references Boleto(IdBoleto)
 )engine=innodb;
 
 
